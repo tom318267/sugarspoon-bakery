@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "slug": "signature-sourdough-bread",
+    "name": "Signature Sourdough Bread",
+    "description": "Our signature sourdough bread is a true labor of love, fermented over 24 hours for the perfect crust and tangy flavor.",
+    "longDesc": "At Sugar Spoon Bakery, we believe that great sourdough bread is a labor of love. That's why we take the time to nurture our dough, allowing it to ferment slowly and naturally to develop its distinctive tangy flavor and airy crumb. Our time-honored fermentation process not only enhances the taste of the bread but also contributes to its exceptional texture and shelf life, ensuring that each slice is a delight to the senses.",
+    "images": ["/sourdough.jpg", "/sourdough2.jpg"],
+    "price": 8.99,
+    "rating": 4,
+    "alt": "Sourdough Bread"
+  },
+  {
+    "id": 2,
+    "slug": "decadent-chocolate-croissants",
+    "name": "Decadent Chocolate Croissants",
+    "description": "Buttery, flaky, and filled with rich, melt-in-your-mouth chocolate, our croissants are a heavenly treat at any time of the day.",
+    "longDesc": "What sets our Chocolate Croissants apart is the generous filling of premium chocolate that awaits within. Rich, indulgent, and perfectly balanced, our chocolate filling is made from the finest cocoa beans, ensuring a velvety smoothness and depth of flavor that will leave you craving more. Whether you're enjoying it as a morning indulgence, an afternoon pick-me-up, or a midnight snack, our Chocolate Croissants are guaranteed to satisfy your sweet tooth and lift your spirits.",
+    "images": ["/croissants.jpg", "/croissants2.jpg"],
+    "price": 7.99,
+    "rating": 5,
+    "alt": "Chocolate Croissants"
+  },
+
+  {
+    "id": 3,
+    "slug": "rainbow-cupcakes",
+    "name": "Rainbow Cupcakes",
+    "description": "Dive into a kaleidoscope of flavors with our Rainbow Cupcakes, where every layer is a celebration of color and taste. ",
+    "longDesc": "Crafted with care and attention to detail, our Rainbow Cupcakes are a labor of love from start to finish. From mixing and baking the perfect batter to meticulously layering each vibrant hue, our bakers pour their hearts and souls into every cupcake, ensuring that each one is a work of art that's as beautiful as it is delicious.",
+    "images": ["/rainbowcupcakes.jpg", "/rainbow2.jpg"],
+    "price": 9.99,
+    "rating": 5,
+    "alt": "Rainbow Cupcakes"
+  }
+]

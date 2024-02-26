@@ -1,0 +1,20 @@
+[
+  {
+    "src": "/cakeimg.svg",
+    "title": "Custom Cake Design",
+    "description": "At Sugar Spoon Bakery, we believe every celebration deserves a cake as unique as the occasion it celebrates. Our custom cake design service invites you to bring your vision to life with the help of our skilled pastry chefs.",
+    "href": "/custom-cake"
+  },
+  {
+    "src": "/catering.svg",
+    "title": "Catering",
+    "description": "Whether you're planning an intimate brunch, a corporate meeting, or the wedding of your dreams, our team is dedicated to delivering culinary delights that perfectly suit your event's theme, dietary preferences, and style.",
+    "href": "/catering"
+  },
+  {
+    "src": "/cookies.svg",
+    "title": "Seasonal and Holiday Specialties",
+    "description": "Celebrate the seasons with Sugar Spoon Bakery's limited-time offerings. Our seasonal and holiday menus feature festive treats and traditional favorites, made with the finest ingredients and a touch of holiday magic.",
+    "href": "/holidays"
+  }
+]
