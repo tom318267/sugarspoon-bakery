@@ -1,9 +1,7 @@
-import { Tab } from "@headlessui/react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useCart } from "../../context/CartContext";
-import { useState } from "react";
 import dbConnect from "../../lib/mongodb";
 import Product from "../../models/Product";
 
@@ -23,10 +21,11 @@ export async function getServerSideProps(context) {
 }
 
 export default function ProductPage({ product }) {
-  const [selectedImage, setSelectedImage] = useState(product.image);
   const { addToCart } = useCart();
 
   const handleAddToCart = () => {
+    console.log("Adding product to cart:", product);
+
     addToCart(product);
   };
 
@@ -58,7 +57,7 @@ export default function ProductPage({ product }) {
         <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
           <div className="flex justify-center items-center h-[25rem] relative">
             <Image
-              src={selectedImage}
+              src={product.image}
               alt={product.name}
               layout="fill"
               objectFit="contain"

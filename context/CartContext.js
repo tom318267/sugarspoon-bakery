@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 export const CartContext = createContext();
 
@@ -7,16 +7,31 @@ export const useCart = () => useContext(CartContext);
 export const CartProvider = ({ children }) => {
   const [items, setItems] = useState([]);
 
+  useEffect(() => {
+    // Directly read from localStorage on mount
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      setItems(JSON.parse(storedCart));
+      console.log("Loaded items from localStorage:", JSON.parse(storedCart));
+    }
+  }, []);
+
+  useEffect(() => {
+    // Directly save to localStorage on items change
+    if (items.length > 0) {
+      localStorage.setItem("cart", JSON.stringify(items));
+      console.log("Saved items to localStorage:", items);
+    }
+  }, [items]);
+
   const addToCart = (productToAdd) => {
     setItems((prevItems) => {
       const foundIndex = prevItems.findIndex(
         (item) => item._id === productToAdd._id
       );
       if (foundIndex < 0) {
-        // Item not found in cart, add as a new item
         return [...prevItems, { ...productToAdd, quantity: 1 }];
       } else {
-        // Item found, update quantity
         return prevItems.map((item, index) =>
           index === foundIndex ? { ...item, quantity: item.quantity + 1 } : item
         );
@@ -28,27 +43,47 @@ export const CartProvider = ({ children }) => {
     setItems((prevItems) => {
       const foundIndex = prevItems.findIndex((item) => item._id === productId);
       if (foundIndex >= 0 && prevItems[foundIndex].quantity > 1) {
-        // Reduce quantity if more than one
         return prevItems.map((item, index) =>
           index === foundIndex ? { ...item, quantity: item.quantity - 1 } : item
         );
       } else {
-        // Remove item if quantity is 1 or less
         return prevItems.filter((item) => item._id !== productId);
       }
     });
   };
 
   const removeFromCart = (productId) => {
-    console.log(productId);
-    setItems((prevItems) => prevItems.filter((item) => item._id !== productId));
+    setItems((currentItems) =>
+      currentItems.filter((item) => item._id !== productId)
+    );
+  };
+
+  const updateQuantity = (productId, quantity) => {
+    setItems((currentItems) =>
+      currentItems
+        .map((item) => {
+          const itemId = item._id || item.id;
+          if (itemId === productId) {
+            return { ...item, quantity };
+          }
+          return item;
+        })
+        .filter((item) => item.quantity > 0)
+    );
   };
 
   const clearCart = () => {
     setItems([]);
   };
 
-  const value = { items, addToCart, reduceQuantity, removeFromCart, clearCart };
+  const value = {
+    items,
+    addToCart,
+    reduceQuantity,
+    removeFromCart,
+    updateQuantity,
+    clearCart,
+  };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
