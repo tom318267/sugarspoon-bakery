@@ -1,43 +1,75 @@
 import Image from "next/image";
-
-const stats = [
-  { label: "Founded", value: "2021" },
-  { label: "Employees", value: "37" },
-  { label: "Countries", value: "12" },
-  { label: "Raised", value: "$25M" },
-];
+import { motion } from "framer-motion";
 
 const CustomCake = () => {
+  // Container animation for the entire section
+  const containerVariants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.2,
+        staggerChildren: 0.1,
+        when: "beforeChildren",
+      },
+    },
+  };
+
+  // Animation for the image to slide up
+  const imageVariants = {
+    hidden: { y: 50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 10,
+      },
+    },
+  };
+
+  // Animation for text content to fade in
+  const textVariants = {
+    hidden: { x: -50, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 10,
+      },
+    },
+  };
+
   return (
-    <div className="bg-white py-24 sm:py-32">
+    <motion.div
+      className="bg-white py-24 sm:py-32"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
       <div className="mx-auto max-w-7xl pb-8 px-6 lg:px-8">
         <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 sm:gap-y-24 lg:mx-0 lg:max-w-none lg:grid-cols-2">
-          <div className="lg:pr-4">
-            <div>
-              <Image
-                className="rounded-md"
-                src="/custom-cake.jpg"
-                alt=""
-                width={600}
-                height={300}
-              />
-
-              <div className="absolute" />
-              <div
-                className="absolute left-1/2 top-1/2 -ml-16"
-                aria-hidden="true"
-              >
-                <div className="w-[68.5625rem]" />
-              </div>
-            </div>
-          </div>
-          <div>
+          <motion.div className="lg:pr-4" variants={imageVariants}>
+            <Image
+              className="rounded-md"
+              src="/custom-cake.jpg"
+              alt=""
+              width={600}
+              height={300}
+              layout="responsive"
+            />
+          </motion.div>
+          <motion.div variants={textVariants}>
             <div className="text-base leading-7 text-gray-700 lg:max-w-lg">
-              <h3 className="mt-2 text-3xl playfair-display tracking-tight text-gray-900 sm:text-4xl">
+              <h3 className="mt-2 text-3xl playfair-display text-gray-900 sm:text-4xl">
                 Custom Cake Design
               </h3>
               <div className="max-w-xl">
-                <p className="mt-6 text-[1rem] montserrat-light">
+                <p className="mt-6 text-[1rem] montserrat-light leading-[1.875rem]">
                   Celebrate life's sweetest moments with a custom cake from
                   Sugar Spoon Bakery. Whether you're marking a milestone
                   birthday, commemorating a special anniversary, or simply
@@ -48,12 +80,9 @@ const CustomCake = () => {
                   lasting impression and create memories that will be cherished
                   for years to come.
                 </p>
-
-                <br />
-
-                <h2 className="montserrat-bold text-accent">
+                <h4 className="montserrat-bold text-accent mt-6">
                   Your Vision, Our Expertise
-                </h2>
+                </h4>
                 <p className="mt-4 text-[1rem] montserrat-light">
                   At Sugar Spoon Bakery, we believe that every cake should be as
                   unique as the person it's made for. That's why we work closely
@@ -64,12 +93,9 @@ const CustomCake = () => {
                   tirelessly to ensure that your custom cake exceeds your
                   expectations and reflects your individual style and taste.
                 </p>
-
-                <br />
-
-                <h2 className="montserrat-bold text-accent">
+                <h4 className="montserrat-bold text-accent mt-6">
                   Order Your Custom Cake Today
-                </h2>
+                </h4>
                 <p className="mt-4 text-[1rem] montserrat-light">
                   Ready to make your cake dreams a reality? Contact us today to
                   schedule your consultation and begin the journey to your
@@ -82,10 +108,10 @@ const CustomCake = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

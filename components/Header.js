@@ -79,7 +79,7 @@ const Header = () => {
                 </Link>
 
                 <Link
-                  href="#"
+                  href="contact-us"
                   className="border-transparent montserrat-med uppercase text-text_color inline-flex items-center px-1 pt-1 text-[1rem]"
                 >
                   Contact Us
