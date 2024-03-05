@@ -5,11 +5,13 @@ import { AuthProvider } from "../context/AuthContext";
 import { CartProvider } from "../context/CartContext";
 import Head from "next/head";
 import Script from "next/script";
+import Notification from "../components/Notification";
 
 function MyApp({ Component, pageProps }) {
   return (
     <AuthProvider>
       <CartProvider>
+        <Notification />
         <Head>
           <title>Sugar Spoon Bakery</title>
           <meta name="description" content="Delicious homemade bakery goods" />

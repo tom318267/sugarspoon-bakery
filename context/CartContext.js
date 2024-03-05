@@ -12,6 +12,10 @@ export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
   const [items, setItems] = useState([]);
+  const [notification, setNotification] = useState({
+    show: false,
+    message: "",
+  });
 
   useEffect(() => {
     // Directly read from localStorage on mount
@@ -43,6 +47,11 @@ export const CartProvider = ({ children }) => {
         );
       }
     });
+    setNotification({
+      show: true,
+      message: `${productToAdd.name} added to cart!`,
+    });
+    setTimeout(() => setNotification({ show: false, message: "" }), 3000); // Hide notification after 3 seconds
   };
 
   const reduceQuantity = (productId) => {
@@ -90,6 +99,7 @@ export const CartProvider = ({ children }) => {
     removeFromCart,
     updateQuantity,
     clearCart,
+    notification,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
