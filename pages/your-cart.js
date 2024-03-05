@@ -1,14 +1,13 @@
 import React from "react";
-import { useCart } from "../context/CartContext"; // Adjust the import path as necessary
+import { useCart } from "../context/CartContext";
 import { CheckIcon, ClockIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function YourCart() {
   const { items, removeFromCart, updateQuantity } = useCart();
 
-  // Calculate subtotal by summing product price * quantity for each item
   const subtotal = items.reduce((acc, item) => {
-    // Check if price is a number or a string that needs to be converted
     const price =
       typeof item.price === "number"
         ? item.price
@@ -16,9 +15,41 @@ export default function YourCart() {
     return acc + price * item.quantity;
   }, 0);
 
-  const taxRate = 0.08; // Example tax rate
+  const taxRate = 0.08;
   const tax = subtotal * taxRate;
   const total = subtotal + tax;
+
+  const listVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { x: -100, opacity: 0 },
+    visible: { x: 0, opacity: 1 },
+  };
+
+  if (items.length === 0) {
+    return (
+      <div className="bg-white py-20 text-center montserrat-med">
+        <h2 className="text-2xl font-semibold">Your cart is empty</h2>
+        <p className="mt-4 text-lg text-gray-600">
+          Looks like you haven't added anything to your cart yet.
+        </p>
+        <Link
+          href="/products"
+          className="mt-4 relative top-6 bg-accent text-white text-[1.125rem] w-[14rem] py-3 px-4 rounded hover:bg-[#D1775D] montserrat-med btn-shadow"
+        >
+          Start Shopping
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white">
@@ -26,18 +57,31 @@ export default function YourCart() {
         <h1 className="text-3xl playfair-display text-gray-900 sm:text-4xl">
           Shopping Cart
         </h1>
-        <form className="mt-12 montserrat-med lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
-          <section aria-labelledby="cart-heading" className="lg:col-span-7">
+        <motion.form
+          className="mt-12 montserrat-med lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16"
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.section
+            aria-labelledby="cart-heading"
+            className="lg:col-span-7"
+            variants={listVariants}
+          >
             <h2 id="cart-heading" className="sr-only">
               Items in your shopping cart
             </h2>
 
-            <ul
+            <motion.ul
               role="list"
               className="divide-y divide-gray-200 border-b border-t border-gray-200"
+              variants={listVariants}
             >
               {items.map((item, index) => (
-                <li key={item._id} className="flex py-6 sm:py-10">
+                <motion.li
+                  key={item._id}
+                  className="flex py-6 sm:py-10"
+                  variants={itemVariants}
+                >
                   <div className="flex-shrink-0">
                     <img
                       src={item.image}
@@ -51,15 +95,11 @@ export default function YourCart() {
                       <div>
                         <div className="flex justify-between">
                           <h3 className="text-sm">
-                            <p
-                              href={item.href}
-                              className="font-medium text-gray-700 hover:text-gray-800"
-                            >
+                            <p className="font-medium text-gray-700 hover:text-gray-800">
                               {item.name}
                             </p>
                           </h3>
                         </div>
-
                         <p className="mt-1 text-sm font-medium text-gray-900">
                           {item.price}
                         </p>
@@ -79,7 +119,7 @@ export default function YourCart() {
                           onChange={(e) =>
                             updateQuantity(item._id, parseInt(e.target.value))
                           }
-                          className="max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                          className="max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:text-sm"
                         >
                           {[...Array(10).keys()].map((value) => (
                             <option key={value} value={value + 1}>
@@ -90,82 +130,74 @@ export default function YourCart() {
 
                         <button
                           type="button"
-                          onClick={() => removeFromCart(item._id)} // Ensure this ID matches the one used in your cart items
+                          onClick={() => removeFromCart(item._id)}
                           className="-m-2 p-2 text-gray-400 hover:text-gray-500"
                         >
                           <XMarkIcon className="h-5 w-5" aria-hidden="true" />
                         </button>
                       </div>
                     </div>
-
-                    <p className="mt-4 flex space-x-2 text-sm text-gray-700">
-                      {item.inStock ? (
-                        <CheckIcon
-                          className="h-5 w-5 flex-shrink-0 text-green-500"
-                          aria-hidden="true"
-                        />
-                      ) : (
-                        <ClockIcon
-                          className="h-5 w-5 flex-shrink-0 text-gray-300"
-                          aria-hidden="true"
-                        />
-                      )}
-
-                      <span>
-                        {item.inStock ? "In stock" : `Ships between 3 -7 days`}
-                      </span>
-                    </p>
                   </div>
-                </li>
+                </motion.li>
               ))}
-            </ul>
-          </section>
+            </motion.ul>
+          </motion.section>
 
-          {/* Order summary */}
-          <section
+          {/* Order summary with animation */}
+          <motion.section
             aria-labelledby="summary-heading"
             className="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8"
+            variants={itemVariants}
           >
-            <h2
-              id="summary-heading"
-              className="text-lg font-medium text-gray-900"
+            {/* Summary content */}
+
+            <section
+              aria-labelledby="summary-heading"
+              className="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8"
             >
-              Order summary
-            </h2>
+              <h2
+                id="summary-heading"
+                className="text-lg font-medium text-gray-900"
+              >
+                Order summary
+              </h2>
 
-            <dl className="mt-6 space-y-4">
-              <div className="flex items-center justify-between">
-                <dt className="text-sm text-gray-600">Subtotal</dt>
-                <dd className="text-sm font-medium text-gray-900">
-                  ${subtotal.toFixed(2)}
-                </dd>
-              </div>
-              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-                <dt className="text-sm text-gray-600">Tax (estimated)</dt>
-                <dd className="text-sm font-medium text-gray-900">
-                  ${tax.toFixed(2)}
-                </dd>
-              </div>
-              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-                <dt className="text-base font-medium text-gray-900">Total</dt>
-                <dd className="text-base font-medium text-gray-900">
-                  ${total.toFixed(2)}
-                </dd>
-              </div>
-            </dl>
+              <dl className="mt-6 space-y-4">
+                <div className="flex items-center justify-between">
+                  <dt className="text-sm text-gray-600">Subtotal</dt>
+                  <dd className="text-sm font-medium text-gray-900">
+                    ${subtotal.toFixed(2)}
+                  </dd>
+                </div>
+                <div className="flex items-center justify-between border-t border-gray-200 pt-4">
+                  <dt className="text-sm text-gray-600">Tax (estimated)</dt>
+                  <dd className="text-sm font-medium text-gray-900">
+                    ${tax.toFixed(2)}
+                  </dd>
+                </div>
+                <div className="flex items-center justify-between border-t border-gray-200 pt-4">
+                  <dt className="text-base font-medium text-gray-900">Total</dt>
+                  <dd className="text-base font-medium text-gray-900">
+                    ${total.toFixed(2)}
+                  </dd>
+                </div>
+              </dl>
 
-            <div className="mt-6">
-              <Link href="/checkout">
-                <button
-                  type="submit"
-                  className="mt-4 bg-accent w-full text-white py-3 px-4 rounded hover:bg-[#D1775D] montserrat-med btn-shadow"
-                >
-                  Checkout
-                </button>
-              </Link>
-            </div>
-          </section>
-        </form>
+              <div className="mt-6">
+                <Link href="/checkout">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    type="submit"
+                    className="mt-4 bg-accent w-full text-white py-3 px-4 rounded hover:bg-[#D1775D] montserrat-med btn-shadow"
+                  >
+                    Checkout
+                  </motion.button>
+                </Link>
+              </div>
+            </section>
+          </motion.section>
+        </motion.form>
       </div>
     </div>
   );

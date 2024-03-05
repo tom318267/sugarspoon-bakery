@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext"; // Adjust the import path according to your file structure
+import Image from "next/image";
 
 const CartIcon = () => {
   const { items } = useContext(CartContext); // Use the CartContext to access cart items
@@ -12,7 +13,14 @@ const CartIcon = () => {
 
   return (
     <div className="relative flex items-center">
-      <img src="/carticon.svg" alt="Cart" />
+      <div className="relative w-[2rem] h-[2rem]">
+        <Image
+          src="/carticon.svg"
+          alt="Cart"
+          layout="fill"
+          objectFit="contain"
+        />
+      </div>
       {cartCount > 0 && (
         <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2 py-1">
           {cartCount}

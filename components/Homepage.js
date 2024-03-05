@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import React from "react";
 import OurSpecialties from "./OurSpecialties";
@@ -32,7 +30,7 @@ const Homepage = () => {
         <div className="max-w-[531px]">
           <motion.h1
             variants={itemVariants}
-            className="text-[5rem] leading-[4.93rem] font-bold playfair-display text-text_color"
+            className="text-[5rem] leading-[6rem] font-bold playfair-display text-text_color"
           >
             Freshly Baked Delights Awaiting You!
           </motion.h1>

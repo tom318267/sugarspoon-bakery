@@ -65,6 +65,7 @@ const OurSpecialties = () => {
                 alt={specialty.alt}
                 layout="fill"
                 objectFit="cover"
+                sizes="100vw"
               />
             </div>
             <div className="flex flex-col flex-1 p-6 bg-white">

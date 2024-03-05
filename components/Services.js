@@ -52,11 +52,11 @@ const Services = () => {
                   height={61}
                   alt={service.title}
                 />
-                <div className="flex flex-col justify-center items-center gap-[0.5rem] py-[0.625rem]">
+                <div className="flex flex-col justify-center text-text_color items-center gap-[0.5rem] py-[0.625rem]">
                   <h3 className="text-[1.25rem] montserrat-med">
                     {service.title}
                   </h3>
-                  <p className="text-center leading-[1.5rem] montserrat-light pb-[0.625rem]">
+                  <p className="text-center leading-[1.5rem] text-text_color montserrat-light pb-[0.625rem]">
                     {service.description}
                   </p>
                 </div>

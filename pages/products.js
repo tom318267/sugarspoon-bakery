@@ -46,12 +46,12 @@ const Products = () => {
           htmlFor="category-filter"
           className="mr-2 montserrat-bold font-semibold"
         >
-          Filter:
+          Filter Category:
         </label>
         <select
           id="category-filter"
           onChange={(e) => setFilter(e.target.value)}
-          className="appearance-none w-[40%] bg-white border border-gray-300 montserrat-med py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          className="appearance-none w-[40%] bg-white border border-gray-300 montserrat-med py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white"
         >
           {categories.map((category, index) => (
             <option key={index} value={category}>
@@ -84,10 +84,10 @@ const Products = () => {
                 />
               </div>
               <div className="flex flex-col flex-1 p-6 bg-white">
-                <h3 className="font-bold text-xl text-text_color mb-2 montserrat-bold">
+                <h3 className="font-bold text-xl text-center text-text_color mb-2 montserrat-bold">
                   {product.name}
                 </h3>
-                <p className="flex-1 text-text_color text-base montserrat-light">
+                <p className="flex-1 text-text_color text-center text-base montserrat-light">
                   {product.description}
                 </p>
                 <Link href={`/products/${product.slug}`}>
