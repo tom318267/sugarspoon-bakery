@@ -7,17 +7,9 @@ import CartIcon from "./CartIcon";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 const Header = () => {
   const { user, logout } = useAuth();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const isLoggedIn = !!user; // Correctly assess the login state
-
-  // Toggle dropdown menu
-  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
     <Disclosure as="nav" className="bg-transparent">
@@ -52,7 +44,7 @@ const Header = () => {
 
               {/* Mobile menu button */}
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-text_color focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -124,21 +116,21 @@ const Header = () => {
               <Disclosure.Button
                 as="a"
                 href="/"
-                className="block px-3 py-2 rounded-md montserrat-med text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                className="block px-3 py-2 rounded-md montserrat-med text-base font-medium text-text_color hover:bg-accent hover:text-white"
               >
                 HOME
               </Disclosure.Button>
               <Disclosure.Button
                 as="a"
                 href="/products"
-                className="block px-3 py-2 rounded-md montserrat-med  text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                className="block px-3 py-2 rounded-md montserrat-med text-base font-medium text-text_color hover:bg-accent hover:text-white"
               >
                 PRODUCTS
               </Disclosure.Button>
               <Disclosure.Button
                 as="a"
-                href="/contact"
-                className="block px-3 py-2 rounded-md montserrat-med  text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                href="/contact-us"
+                className="block px-3 py-2 rounded-md montserrat-med text-base font-medium text-text_color hover:bg-accent hover:text-white"
               >
                 CONTACT US
               </Disclosure.Button>
@@ -151,77 +143,3 @@ const Header = () => {
 };
 
 export default Header;
-
-// import React, { useState } from "react";
-// import Link from "next/link";
-// import { useAuth } from "../context/AuthContext";
-// import CartIcon from "./CartIcon";
-// import Image from "next/image";
-
-// const Header = () => {
-//   const { user, logout } = useAuth();
-//   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-//   const isLoggedIn = !!user; // Correctly assess the login state
-
-//   // Toggle dropdown menu
-//   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
-
-//   return (
-//     <header className="bg-beige-100 text-brown-700 py-4">
-//       <nav className="flex justify-between items-center container mx-auto px-4">
-//         {/* Logo on the left */}
-//         <Link href="/">
-//           <Image
-//             src="/sugarspoon.svg"
-//             alt="Logo"
-//             width={129}
-//             height={83}
-//             priority
-//           />
-//         </Link>
-
-//         {/* Hamburger menu for medium screens */}
-//         <div className="md:hidden">
-//           <button onClick={toggleDropdown}>
-//             {/* Icon or text for menu toggle */}
-//             Menu
-//           </button>
-//         </div>
-
-//         {/* Conditional rendering for navigation items and login/logout based on screen size and dropdown state */}
-//         <div
-//           className={`${
-//             isDropdownOpen ? "flex" : "hidden"
-//           } flex-col md:flex-row md:flex items-center gap-[70px]`}
-//         >
-//           <div className="flex flex-col md:flex-row justify-center gap-[70px] montserrat-med uppercase">
-//             <Link href="/">Home</Link>
-//             <Link href="/about">About Us</Link>
-//             <Link href="/products">Products</Link>
-//           </div>
-//           <div className="flex items-center">
-//             {isLoggedIn ? (
-//               <a
-//                 onClick={() => logout()}
-//                 className="hover:text-red-500 cursor-pointer"
-//               >
-//                 Sign Out
-//               </a>
-//             ) : (
-//               <>
-//                 <Link href="/your-cart">
-//                   <CartIcon />
-//                 </Link>
-//                 <Link href="/login">Login</Link>
-//                 {/* Uncomment or add as needed */}
-//                 {/* <Link href="/signup"><a>Signup</a></Link> */}
-//               </>
-//             )}
-//           </div>
-//         </div>
-//       </nav>
-//     </header>
-//   );
-// };
-
-// export default Header;

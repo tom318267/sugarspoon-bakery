@@ -41,7 +41,7 @@ const Products = () => {
   return (
     <div>
       {/* Category Selection Dropdown */}
-      <div className="flex justify-end items-center mb-4 mt-6 px-[2rem] lg:px-[6rem]">
+      <div className="flex justify-end px-6 items-center mb-4 mt-6 lg:px-[6rem]">
         <label
           htmlFor="category-filter"
           className="mr-2 montserrat-bold font-semibold"
@@ -63,7 +63,7 @@ const Products = () => {
 
       {/* Products Grid with Animation */}
       <motion.div
-        className="sm:px-[2rem] md:px-[4rem] lg:px-[6rem] grid grid-cols-1 md:grid-cols-3 gap-[2.063rem] py-[3.5rem]"
+        className="px-6 md:px-[4rem] lg:px-[6rem] grid grid-cols-1 md:grid-cols-3 gap-[2.063rem] py-[3.5rem]"
         variants={containerVariants}
         initial="hidden"
         animate="visible"

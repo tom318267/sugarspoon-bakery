@@ -41,11 +41,14 @@ export default function YourCart() {
         <p className="mt-4 text-lg text-gray-600">
           Looks like you haven't added anything to your cart yet.
         </p>
-        <Link
-          href="/products"
-          className="mt-4 relative top-6 bg-accent text-white text-[1.125rem] w-[14rem] py-3 px-4 rounded hover:bg-[#D1775D] montserrat-med btn-shadow"
-        >
-          Start Shopping
+        <Link href="/products">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="mt-4 relative top-6 bg-accent text-white text-[1.125rem] w-[14rem] py-3 px-4 rounded hover:bg-[#D1775D] montserrat-med btn-shadow"
+          >
+            Start Shopping
+          </motion.button>
         </Link>
       </div>
     );

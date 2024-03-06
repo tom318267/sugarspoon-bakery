@@ -45,7 +45,7 @@ const Services = () => {
               initial="hidden"
               animate={controls}
             >
-              <div className="flex flex-col justify-center items-center p-[1.25rem]">
+              <div className="flex flex-col justify-center items-center p-6">
                 <Image
                   src={service.src}
                   width={65}

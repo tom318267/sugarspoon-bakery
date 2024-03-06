@@ -47,7 +47,7 @@ const Homepage = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               variants={itemVariants}
-              className="mt-4 bg-accent text-white text-[1.125rem] w-[14rem] py-3 px-4 rounded hover:bg-[#D1775D] montserrat-med btn-shadow"
+              className="mt-4 bg-accent text-white text-[1.125rem] w-full md:w-[14rem] py-3 px-4 rounded hover:bg-[#D1775D] montserrat-med btn-shadow"
             >
               Explore Our Menu
             </motion.button>

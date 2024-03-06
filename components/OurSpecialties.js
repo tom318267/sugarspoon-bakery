@@ -35,8 +35,7 @@ const OurSpecialties = () => {
         },
         hidden: { opacity: 0 },
       }}
-      id="about"
-      className="px-[6rem] pt-[7.6rem] pb-[11.188rem] text-center bg-[#F3D8C7] md:px-12"
+      className="px-6 pt-[7.6rem] pb-[11.188rem] text-center bg-[#F3D8C7] md:px-12"
     >
       <motion.h2
         variants={itemVariants}
