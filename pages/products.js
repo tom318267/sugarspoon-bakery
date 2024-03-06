@@ -1,28 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion"; // Import motion
+import { motion } from "framer-motion";
 
-const Products = () => {
-  const [products, setProducts] = useState([]);
-  const [filter, setFilter] = useState("All"); // State to store the current filter
+export async function getServerSideProps(context) {
+  const { req } = context;
+  const protocol = req.headers["x-forwarded-proto"] || "http";
+  const host = req.headers.host;
+  const baseUrl = `${protocol}://${host}`;
+  const apiUrl = `${baseUrl}/api/products`;
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch("/api/products");
-        if (!response.ok) throw new Error("Products could not be found");
-        const data = await response.json();
-        setProducts(data || []);
-      } catch (error) {
-        console.error("Error fetching products:", error.message);
-        setProducts([]);
-      }
-    };
-    fetchProducts();
-  }, []);
+  let products = [];
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) throw new Error("Products could not be fetched");
+    products = await response.json();
+  } catch (error) {
+    console.error("Error fetching products:", error.message);
+  }
+  return {
+    props: { products },
+  };
+}
 
-  // Optional: Extract categories from products
+const Products = ({ products }) => {
+  const [filter, setFilter] = useState("All");
+
+  // Extract categories from products
   const categories = [
     "All",
     ...new Set(products.map((product) => product.category)),
@@ -31,16 +35,11 @@ const Products = () => {
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { delay: 0.3, duration: 0.6 },
-    },
+    visible: { opacity: 1, y: 0, transition: { delay: 0.3, duration: 0.6 } },
   };
 
   return (
     <div>
-      {/* Category Selection Dropdown */}
       <div className="flex justify-end px-6 items-center mb-4 mt-6 lg:px-[6rem]">
         <label
           htmlFor="category-filter"
@@ -61,7 +60,6 @@ const Products = () => {
         </select>
       </div>
 
-      {/* Products Grid with Animation */}
       <motion.div
         className="px-6 md:px-[4rem] lg:px-[6rem] grid grid-cols-1 md:grid-cols-3 gap-[2.063rem] py-[3.5rem]"
         variants={containerVariants}
@@ -78,9 +76,10 @@ const Products = () => {
               <div className="w-full h-64 relative">
                 <Image
                   src={product.image}
-                  alt={product.alt}
+                  alt={product.name}
                   layout="fill"
                   objectFit="cover"
+                  sizes="(min-width: 640px) 50vw, 100vw"
                 />
               </div>
               <div className="flex flex-col flex-1 p-6 bg-white">
