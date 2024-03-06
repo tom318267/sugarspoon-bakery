@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const Catering = () => {
-  // Animation variants for the text and image
   const textVariants = {
     offscreen: { x: -100, opacity: 0 },
     onscreen: {
