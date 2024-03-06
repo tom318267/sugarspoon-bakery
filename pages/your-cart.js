@@ -3,6 +3,7 @@ import { useCart } from "../context/CartContext";
 import { CheckIcon, ClockIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function YourCart() {
   const { items, removeFromCart, updateQuantity } = useCart();
@@ -86,10 +87,13 @@ export default function YourCart() {
                   variants={itemVariants}
                 >
                   <div className="flex-shrink-0">
-                    <img
+                    <Image
+                      className="rounded-md"
                       src={item.image}
                       alt={item.name}
-                      className="h-24 w-24 rounded-md object-cover object-center sm:h-48 sm:w-48"
+                      width={200} // Specify a width
+                      height={200} // And a height
+                      objectFit="cover" // Apply object-fit as a prop
                     />
                   </div>
 
