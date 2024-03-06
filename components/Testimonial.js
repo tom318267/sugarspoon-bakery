@@ -36,7 +36,7 @@ const Testimonial = () => {
       <div className="flex flex-col justify-center items-center px-[5rem] py-[6rem]">
         <motion.h2
           variants={variants}
-          className="montserrat-med text-[2.625rem] text-center leading-[3.75rem]"
+          className="montserrat-med text-[2.005rem] md:text-[2.625rem] text-center leading-[3.75rem]"
         >
           "Sugar Spoon Bakery is my morning haven. Their fresh coffee and
           cinnamon rolls are the perfect start to my day. It’s a little place of

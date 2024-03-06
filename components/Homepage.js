@@ -30,7 +30,7 @@ const Homepage = () => {
         <div className="max-w-[531px]">
           <motion.h1
             variants={itemVariants}
-            className="text-[5rem] leading-[6rem] font-bold playfair-display text-text_color"
+            className="text-[4rem] md:text-[5rem] leading-[6rem] font-bold playfair-display text-text_color"
           >
             Freshly Baked Delights Awaiting You!
           </motion.h1>

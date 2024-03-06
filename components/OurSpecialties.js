@@ -39,7 +39,7 @@ const OurSpecialties = () => {
     >
       <motion.h2
         variants={itemVariants}
-        className="text-[3.5rem] text-text_color font-bold text-center playfair-display"
+        className="text-[2.5rem] md:text-[3.5rem] text-text_color font-bold text-center playfair-display"
       >
         Our Specialties
       </motion.h2>
