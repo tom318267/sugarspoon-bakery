@@ -22,7 +22,7 @@ const Header = () => {
                 <Link href="/">
                   <Image
                     className="hidden w-auto"
-                    src="/sugarspoon.svg"
+                    src="/sugarlogo.png"
                     alt="Logo"
                     width={129}
                     height={83}
