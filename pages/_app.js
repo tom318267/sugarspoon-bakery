@@ -1,17 +1,21 @@
 import "../styles/globals.css";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import dynamic from "next/dynamic";
 import { AuthProvider } from "../context/AuthContext";
 import { CartProvider } from "../context/CartContext";
 import Head from "next/head";
 import Script from "next/script";
-import Notification from "../components/Notification";
+
+// Lazy load components
+const Header = dynamic(() => import("../components/Header"), { ssr: false });
+const Footer = dynamic(() => import("../components/Footer"), { ssr: false });
+const Notification = dynamic(() => import("../components/Notification"), {
+  ssr: false,
+});
 
 function MyApp({ Component, pageProps }) {
   return (
     <AuthProvider>
       <CartProvider>
-        <Notification />
         <Head>
           <title>Sugar Spoon Bakery</title>
           <meta name="description" content="Delicious homemade bakery goods" />
